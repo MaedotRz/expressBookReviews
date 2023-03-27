@@ -36,22 +36,23 @@ regd_users.post("/login", (req,res) => {
 
 // Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
-    // if(req.params.isbn){
-    //     let isbn = req.params.isbn
-    //     let book = books[isbn]
+    if(req.params.isbn){
+        let isbn = req.params.isbn
+        let book = books[isbn]
 
-    //     if(book){
-    //         if(req.body.review){
-    //             book['reviews'] = {
-    //                 req.user.data:req.body.review
-    //             }
-    //         }
-    //     }
-    //     books[isbn] = book
-    //     console.log(books[isbn])
-    //     res.send('review added')
+        if(book){
+            if(req.body.review){
+                book['reviews'] = {
+                    username: req.user.data,
+                    review: req.body.review
+                }
+            }
+        }
+        books[isbn] = book
+        console.log(books[isbn])
+        res.send('review added')
 
-    // }
+    }
 });
 regd_users.delete("/auth/review/:isbn", (req, res) => {
     let isbn = req.params.isbn
